@@ -9,12 +9,13 @@
 /* Begin PBXBuildFile section */
 		6F2F96872BA5A07B00D56C74 /* CatventoryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F96862BA5A07B00D56C74 /* CatventoryApp.swift */; };
 		6F2F96892BA5A07B00D56C74 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F96882BA5A07B00D56C74 /* ContentView.swift */; };
-		6F2F968B2BA5A07B00D56C74 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F968A2BA5A07B00D56C74 /* Item.swift */; };
 		6F2F968D2BA5A07D00D56C74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F2F968C2BA5A07D00D56C74 /* Assets.xcassets */; };
 		6F2F96902BA5A07D00D56C74 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F2F968F2BA5A07D00D56C74 /* Preview Assets.xcassets */; };
 		6F2F969A2BA5A07D00D56C74 /* CatventoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F96992BA5A07D00D56C74 /* CatventoryTests.swift */; };
 		6F2F96A42BA5A07D00D56C74 /* CatventoryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F96A32BA5A07D00D56C74 /* CatventoryUITests.swift */; };
 		6F2F96A62BA5A07D00D56C74 /* CatventoryUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F96A52BA5A07D00D56C74 /* CatventoryUITestsLaunchTests.swift */; };
+		6F2F96BA2BA5C9D500D56C74 /* CheckInCheckOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F96B92BA5C9D500D56C74 /* CheckInCheckOutView.swift */; };
+		6F2F96BC2BA5D36F00D56C74 /* ShowAllScansView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F96BB2BA5D36E00D56C74 /* ShowAllScansView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +39,6 @@
 		6F2F96832BA5A07B00D56C74 /* Catventory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Catventory.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F2F96862BA5A07B00D56C74 /* CatventoryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatventoryApp.swift; sourceTree = "<group>"; };
 		6F2F96882BA5A07B00D56C74 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		6F2F968A2BA5A07B00D56C74 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		6F2F968C2BA5A07D00D56C74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F2F968F2BA5A07D00D56C74 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6F2F96952BA5A07D00D56C74 /* CatventoryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatventoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,6 +46,8 @@
 		6F2F969F2BA5A07D00D56C74 /* CatventoryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatventoryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F2F96A32BA5A07D00D56C74 /* CatventoryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatventoryUITests.swift; sourceTree = "<group>"; };
 		6F2F96A52BA5A07D00D56C74 /* CatventoryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatventoryUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6F2F96B92BA5C9D500D56C74 /* CheckInCheckOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInCheckOutView.swift; sourceTree = "<group>"; };
+		6F2F96BB2BA5D36E00D56C74 /* ShowAllScansView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAllScansView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +100,8 @@
 			children = (
 				6F2F96862BA5A07B00D56C74 /* CatventoryApp.swift */,
 				6F2F96882BA5A07B00D56C74 /* ContentView.swift */,
-				6F2F968A2BA5A07B00D56C74 /* Item.swift */,
+				6F2F96B92BA5C9D500D56C74 /* CheckInCheckOutView.swift */,
+				6F2F96BB2BA5D36E00D56C74 /* ShowAllScansView.swift */,
 				6F2F968C2BA5A07D00D56C74 /* Assets.xcassets */,
 				6F2F968E2BA5A07D00D56C74 /* Preview Content */,
 			);
@@ -218,6 +221,9 @@
 				Base,
 			);
 			mainGroup = 6F2F967A2BA5A07B00D56C74;
+			packageReferences = (
+				6F2F96B82BA5BBC100D56C74 /* XCRemoteSwiftPackageReference "CodeScanner" */,
+			);
 			productRefGroup = 6F2F96842BA5A07B00D56C74 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -261,8 +267,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F2F96892BA5A07B00D56C74 /* ContentView.swift in Sources */,
-				6F2F968B2BA5A07B00D56C74 /* Item.swift in Sources */,
 				6F2F96872BA5A07B00D56C74 /* CatventoryApp.swift in Sources */,
+				6F2F96BC2BA5D36F00D56C74 /* ShowAllScansView.swift in Sources */,
+				6F2F96BA2BA5C9D500D56C74 /* CheckInCheckOutView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,11 +436,11 @@
 				DEVELOPMENT_TEAM = 8Y3J97SYZG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "App uses camera to detect QR codes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = "";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -458,11 +465,11 @@
 				DEVELOPMENT_TEAM = 8Y3J97SYZG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "App uses camera to detect QR codes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = "";
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -592,6 +599,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6F2F96B82BA5BBC100D56C74 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.4.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 6F2F967B2BA5A07B00D56C74 /* Project object */;
 }
