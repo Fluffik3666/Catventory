@@ -16,7 +16,25 @@
 		6F2F96A62BA5A07D00D56C74 /* CatventoryUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F96A52BA5A07D00D56C74 /* CatventoryUITestsLaunchTests.swift */; };
 		6F2F96BA2BA5C9D500D56C74 /* CheckInCheckOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F96B92BA5C9D500D56C74 /* CheckInCheckOutView.swift */; };
 		6F2F96BC2BA5D36F00D56C74 /* ShowAllScansView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F96BB2BA5D36E00D56C74 /* ShowAllScansView.swift */; };
+		6F2F96C62BA76FD800D56C74 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F96C52BA76FD800D56C74 /* HomeScreenView.swift */; };
+		6F2F96CB2BA7737200D56C74 /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2F96CA2BA7737200D56C74 /* SwiftUIIntrospect */; };
+		6F2F96CD2BA77AF500D56C74 /* MoreInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F96CC2BA77AF500D56C74 /* MoreInfoView.swift */; };
+		6F2F96CF2BA782F200D56C74 /* ShowImportedCSVDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F96CE2BA782F200D56C74 /* ShowImportedCSVDataView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		6F2F96D42BA7915000D56C74 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = text.plist;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# builtin-copyPlist\n";
+		};
+/* End PBXBuildRule section */
 
 /* Begin PBXContainerItemProxy section */
 		6F2F96962BA5A07D00D56C74 /* PBXContainerItemProxy */ = {
@@ -48,6 +66,9 @@
 		6F2F96A52BA5A07D00D56C74 /* CatventoryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatventoryUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		6F2F96B92BA5C9D500D56C74 /* CheckInCheckOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInCheckOutView.swift; sourceTree = "<group>"; };
 		6F2F96BB2BA5D36E00D56C74 /* ShowAllScansView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAllScansView.swift; sourceTree = "<group>"; };
+		6F2F96C52BA76FD800D56C74 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
+		6F2F96CC2BA77AF500D56C74 /* MoreInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoView.swift; sourceTree = "<group>"; };
+		6F2F96CE2BA782F200D56C74 /* ShowImportedCSVDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowImportedCSVDataView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F2F96CB2BA7737200D56C74 /* SwiftUIIntrospect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +121,9 @@
 			isa = PBXGroup;
 			children = (
 				6F2F96862BA5A07B00D56C74 /* CatventoryApp.swift */,
+				6F2F96C52BA76FD800D56C74 /* HomeScreenView.swift */,
+				6F2F96CE2BA782F200D56C74 /* ShowImportedCSVDataView.swift */,
+				6F2F96CC2BA77AF500D56C74 /* MoreInfoView.swift */,
 				6F2F96882BA5A07B00D56C74 /* ContentView.swift */,
 				6F2F96B92BA5C9D500D56C74 /* CheckInCheckOutView.swift */,
 				6F2F96BB2BA5D36E00D56C74 /* ShowAllScansView.swift */,
@@ -145,10 +170,14 @@
 				6F2F96812BA5A07B00D56C74 /* Resources */,
 			);
 			buildRules = (
+				6F2F96D42BA7915000D56C74 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
 			name = Catventory;
+			packageProductDependencies = (
+				6F2F96CA2BA7737200D56C74 /* SwiftUIIntrospect */,
+			);
 			productName = Catventory;
 			productReference = 6F2F96832BA5A07B00D56C74 /* Catventory.app */;
 			productType = "com.apple.product-type.application";
@@ -223,6 +252,7 @@
 			mainGroup = 6F2F967A2BA5A07B00D56C74;
 			packageReferences = (
 				6F2F96B82BA5BBC100D56C74 /* XCRemoteSwiftPackageReference "CodeScanner" */,
+				6F2F96C92BA7737200D56C74 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 6F2F96842BA5A07B00D56C74 /* Products */;
 			projectDirPath = "";
@@ -266,8 +296,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F2F96CF2BA782F200D56C74 /* ShowImportedCSVDataView.swift in Sources */,
 				6F2F96892BA5A07B00D56C74 /* ContentView.swift in Sources */,
 				6F2F96872BA5A07B00D56C74 /* CatventoryApp.swift in Sources */,
+				6F2F96C62BA76FD800D56C74 /* HomeScreenView.swift in Sources */,
+				6F2F96CD2BA77AF500D56C74 /* MoreInfoView.swift in Sources */,
 				6F2F96BC2BA5D36F00D56C74 /* ShowAllScansView.swift in Sources */,
 				6F2F96BA2BA5C9D500D56C74 /* CheckInCheckOutView.swift in Sources */,
 			);
@@ -436,6 +469,7 @@
 				DEVELOPMENT_TEAM = 8Y3J97SYZG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Catventory/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "App uses camera to detect QR codes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = "";
@@ -465,6 +499,7 @@
 				DEVELOPMENT_TEAM = 8Y3J97SYZG;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Catventory/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "App uses camera to detect QR codes";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = "";
@@ -609,7 +644,23 @@
 				minimumVersion = 2.4.0;
 			};
 		};
+		6F2F96C92BA7737200D56C74 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6F2F96CA2BA7737200D56C74 /* SwiftUIIntrospect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F2F96C92BA7737200D56C74 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = SwiftUIIntrospect;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6F2F967B2BA5A07B00D56C74 /* Project object */;
 }

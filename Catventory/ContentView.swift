@@ -73,7 +73,7 @@ class QRScannerController: UIViewController {
 
 struct QRScanner: UIViewControllerRepresentable {
 	@Binding var result: String
-
+	
 	func makeCoordinator() -> Coordinator {
 		Coordinator($result)
 	}
@@ -82,114 +82,135 @@ struct QRScanner: UIViewControllerRepresentable {
 	func makeUIViewController(context: Context) -> QRScannerController {
 		let controller = QRScannerController()
 		controller.delegate = context.coordinator
-	 
+		
 		return controller
 	}
- 
+	
 	func updateUIViewController(_ uiViewController: QRScannerController, context: Context) {
 	}
 	
 	class Coordinator: NSObject, AVCaptureMetadataOutputObjectsDelegate {
-	 
+		var showingSheet = UserDefaults.standard.bool(forKey: "CheckInCheckOutSheetOpen")
 		@Binding var scanResult: String
-	 
+		
 		init(_ scanResult: Binding<String>) {
 			self._scanResult = scanResult
 		}
-	 
+		
 		func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-	 
-			// Check if the metadataObjects array is not nil and it contains at least one object.
+			
+				// Check if the metadataObjects array is not nil and it contains at least one object.
 			if metadataObjects.count == 0 {
 				scanResult = "No QR code detected"
 				return
 			}
-	 
-			// Get the metadata object.
+			
+				// Get the metadata object.
 			let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
-	 
-			if metadataObj.type == AVMetadataObject.ObjectType.qr,
-			   let result = metadataObj.stringValue {
-	 
-				scanResult = result
-	 
+			
+			if showingSheet == false {
+				
+				if metadataObj.type == AVMetadataObject.ObjectType.qr,
+				   let result = metadataObj.stringValue {
+					scanResult = result
+				}
+			} else {
+				if metadataObj.type == AVMetadataObject.ObjectType.qr,
+				   let result = metadataObj.stringValue {
+					scanResult = "No QR Code Detected"
+				}
 			}
 		}
 	}
 }
-
-func modeDeafult() {
-	UserDefaults.standard.set("Check In", forKey: "mode")
-}
-
-
-
-struct ContentView: View {
-	@State var scanResult = "No QR code detected"
-	@State var mode = "Check In"
-	@State var peformAction = false
-	@State var showingScans = false
 	
-	var body: some View {
-		ZStack(alignment: .bottom) {
-			QRScanner(result: $scanResult)
-
-			
-			VStack {
-				Text(scanResult)
-					.padding()
-					.background(.black)
-					.foregroundColor(.white)
-					.clipShape(RoundedRectangle(cornerRadius: 20))
-				.padding()
-				
-				Button(action: {
-					if mode == "Check In" {
-						mode = "Check Out"
-						UserDefaults.standard.set("Check Out", forKey: "mode")
-					} else if mode == "Check Out" {
-						mode = "Check In"
-						UserDefaults.standard.set("Check In", forKey: "mode")
-					}
-					
-				}) {
-					Text("Current mode \(mode), click to change")
-				}
-					.foregroundStyle(.white)
-					.buttonStyle(.borderedProminent)
-
-				
-				HStack {
-					Button(action: {
-						self.peformAction.toggle()
-					}) {
-						Text("Peform Action")
-					}
-						.foregroundStyle(.white)
-						.buttonStyle(.borderedProminent)
-						.sheet(isPresented: $peformAction) {
-							CheckInCheckOutView()
-						}
-					
-					Button(action: {
-						self.showingScans.toggle()
-					}) {
-						Text("Show Scans")
-					}
-						.foregroundStyle(.white)
-						.buttonStyle(.borderedProminent)
-						.sheet(isPresented: $showingScans) {
-							ShowAllScansView()
-						}
-				}
+	func modeDeafult() {
+		UserDefaults.standard.set("Check In", forKey: "mode")
+	}
+	
+	
+	
+	struct ContentView: View {
+		@State var scanResult = "No QR code detected"
+		@State var mode = "Check In"
+		@State var peformAction = false
+		@State var showingScans = false
+		@State var showingSheet = false
+		
+		func checkIncheckOutScreen() {
+			if let window = UIApplication.shared.windows.first {
+				window.rootViewController = UIHostingController(rootView: CheckInCheckOutView(QRtextresult: scanResult))
+				window.makeKeyAndVisible()
 			}
 		}
+		
+		
+		
+		var body: some View {
+				ZStack(alignment: .bottom) {
+					QRScanner(result: $scanResult)
+					
+					VStack {
+						Button(scanResult) {
+							checkIncheckOutScreen()
+						}
+							.padding()
+							.background(.black)
+							.foregroundColor(.white)
+							.clipShape(RoundedRectangle(cornerRadius: 20))
+						
+						
+							.padding()
+						
+						
+						
+						Button(action: {
+							if mode == "Check In" {
+								mode = "Check Out"
+								UserDefaults.standard.set("Check Out", forKey: "mode")
+							} else if mode == "Check Out" {
+								mode = "Check In"
+								UserDefaults.standard.set("Check In", forKey: "mode")
+							}
+							
+						}) {
+							Text("Current mode \(mode), click to change")
+						}
+						.foregroundStyle(.white)
+						.buttonStyle(.borderedProminent)
+						
+						
+						
+						HStack {
+								// TODO: Change this button to a back button to the main screen
+							Button(action: {
+								self.peformAction.toggle()
+							}) {
+								Text("Back")
+							}
+							.foregroundStyle(.white)
+							.buttonStyle(.borderedProminent)
+							
+							Button(action: {
+								self.showingScans.toggle()
+							}) {
+								Text("Show Scans")
+							}
+							.foregroundStyle(.white)
+							.buttonStyle(.borderedProminent)
+							.sheet(isPresented: $showingScans) {
+								ShowAllScansView()
+							}
+						}
+					}
+				}
 			
+		}
 	}
-}
-
-
-
+	
+	
+	
 #Preview {
-    ContentView()
+		ContentView()
 }
+
