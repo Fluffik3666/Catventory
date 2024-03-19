@@ -1,5 +1,5 @@
 {
-  "originHash" : "0c6a6d44f450d15cf9776556dca54b167f588f231e9ac7044c0b9ed1641fd588",
+  "originHash" : "848be05d18ea0684e5efd5dcd75377d421ebbf68399a76b512e0dcf828c42db5",
   "pins" : [
     {
       "identity" : "codescanner",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "303bd5adbb61d068c3bcbb839857340c3e6ff8b0",
         "version" : "2.4.0"
+      }
+    },
+    {
+      "identity" : "filepicker",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/markrenaud/FilePicker",
+      "state" : {
+        "revision" : "720f8cb5ca0c0efc982ed381afc84ba3e8b3214e",
+        "version" : "1.0.1"
       }
     },
     {

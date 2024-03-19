@@ -20,6 +20,7 @@
 		6F2F96CB2BA7737200D56C74 /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2F96CA2BA7737200D56C74 /* SwiftUIIntrospect */; };
 		6F2F96CD2BA77AF500D56C74 /* MoreInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F96CC2BA77AF500D56C74 /* MoreInfoView.swift */; };
 		6F2F96CF2BA782F200D56C74 /* ShowImportedCSVDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F96CE2BA782F200D56C74 /* ShowImportedCSVDataView.swift */; };
+		6F2F96D72BA8C12500D56C74 /* FilePicker in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2F96D62BA8C12500D56C74 /* FilePicker */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -76,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F2F96D72BA8C12500D56C74 /* FilePicker in Frameworks */,
 				6F2F96CB2BA7737200D56C74 /* SwiftUIIntrospect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -177,6 +179,7 @@
 			name = Catventory;
 			packageProductDependencies = (
 				6F2F96CA2BA7737200D56C74 /* SwiftUIIntrospect */,
+				6F2F96D62BA8C12500D56C74 /* FilePicker */,
 			);
 			productName = Catventory;
 			productReference = 6F2F96832BA5A07B00D56C74 /* Catventory.app */;
@@ -253,6 +256,7 @@
 			packageReferences = (
 				6F2F96B82BA5BBC100D56C74 /* XCRemoteSwiftPackageReference "CodeScanner" */,
 				6F2F96C92BA7737200D56C74 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				6F2F96D52BA8C12500D56C74 /* XCRemoteSwiftPackageReference "FilePicker" */,
 			);
 			productRefGroup = 6F2F96842BA5A07B00D56C74 /* Products */;
 			projectDirPath = "";
@@ -652,6 +656,14 @@
 				minimumVersion = 1.1.3;
 			};
 		};
+		6F2F96D52BA8C12500D56C74 /* XCRemoteSwiftPackageReference "FilePicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/markrenaud/FilePicker";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -659,6 +671,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6F2F96C92BA7737200D56C74 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = SwiftUIIntrospect;
+		};
+		6F2F96D62BA8C12500D56C74 /* FilePicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F2F96D52BA8C12500D56C74 /* XCRemoteSwiftPackageReference "FilePicker" */;
+			productName = FilePicker;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct HomeScreenView: View {
 	@State private var isPickerShown = false
 	// Define state variables for each column
@@ -98,7 +99,7 @@ struct HomeScreenView: View {
 		
 		VStack {
 			Button() {
-				isPickerShown.toggle()
+				isPickerShown = true
 			} label: {
 				Text("Import CSV")
 				Image(systemName: "tablecells")
@@ -107,11 +108,17 @@ struct HomeScreenView: View {
 			.buttonStyle(.borderedProminent)
 			.frame(maxWidth: .infinity, alignment: .topLeading)
 			.padding()
-			.sheet(isPresented: $isPickerShown, onDismiss: {
-				showImportedCSVData()
-			}) {
-				DocumentPicker { url in
-					parseCSV(at: url)
+			.fileImporter(
+				isPresented: $isPickerShown,
+				allowedContentTypes: [.spreadsheet]
+			) { result in
+				switch result {
+				case .success(let file):
+					file.startAccessingSecurityScopedResource()
+					print(file.absoluteString)
+					file.stopAccessingSecurityScopedResource()
+				case .failure(let error):
+					print(error.localizedDescription)
 				}
 			}
 			
