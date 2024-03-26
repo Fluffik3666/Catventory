@@ -19,6 +19,9 @@ struct HomeScreenView: View {
 	@State var csvImported = false
 	@State var csvImportedAlert = false
 	@Environment(\.dismiss) private var dismiss
+	@State private var text = ""
+	@State private var isImporting = false
+	@State private var error: Error?
 	
 	func moreInfo() {
 		if let window = UIApplication.shared.windows.first {
@@ -53,7 +56,7 @@ struct HomeScreenView: View {
 	}
 	
 	
-	func parseCSV(at url: URL) {
+	func parseCSV(at url: URL) -> Result<String,Error> {
 		// Reset previous data
 		firstNames = []
 		lastNames = []
@@ -61,33 +64,37 @@ struct HomeScreenView: View {
 		tourTimes = []
 		tourNames = []
 		
-		do {
-			let content = try String(contentsOf: url)
-			let rows = content.split(separator: "\n")
-			
-			for row in rows.dropFirst() {
-				let columns = row.split(separator: ",", omittingEmptySubsequences: false).map { String($0) }
-				
-				if columns.count >= 5 {
-					firstNames.append(columns[0])
-					lastNames.append(columns[1])
-					tourDates.append(columns[2])
-					tourTimes.append(columns[3])
-					tourNames.append(columns[4])
-				}
-			}
-		
-			csvImported = true
-			dismiss()
-		} catch {
-			Alert(
-				title: Text("Error"),
-				message: Text("Failed to read file! Error: \(error)"),
-				dismissButton: .default(Text("OK"))
-			)
-			csvImported = false
-			print("Failed to read the file: \(error)")
+		let accessing = url.startAccessingSecurityScopedResource()
+		defer {
+		  if accessing {
+			url.stopAccessingSecurityScopedResource()
+		  }
 		}
+		
+		return Result { try String(contentsOf: url) }
+		
+		//do {
+			//let content = try String(contentsOf: url)
+			//let rows = content.split(separator: "\n")
+			
+			//for row in rows.dropFirst() {
+				//let columns = row.split(separator: ",", //omittingEmptySubsequences: false).map { //String($0) }
+				
+				//if columns.count >= 5 {
+					//firstNames.append(columns[0])
+					//lastNames.append(columns[1])
+					//tourDates.append(columns[2])
+					//tourTimes.append(columns[3])
+					//tourNames.append(columns[4])
+				//}
+			//}
+		
+			//csvImported = true
+			//dismiss()
+		//} catch {
+			//csvImported = false
+			//print("Failed to read the file: \(error)")
+		//}
 	}
 	
     var body: some View {
@@ -110,13 +117,11 @@ struct HomeScreenView: View {
 			.padding()
 			.fileImporter(
 				isPresented: $isPickerShown,
-				allowedContentTypes: [.spreadsheet]
+				allowedContentTypes: [.commaSeparatedText]
 			) { result in
 				switch result {
 				case .success(let file):
-					file.startAccessingSecurityScopedResource()
-					print(file.absoluteString)
-					file.stopAccessingSecurityScopedResource()
+					parseCSV(at: file)
 				case .failure(let error):
 					print(error.localizedDescription)
 				}
@@ -175,37 +180,6 @@ struct HomeScreenView: View {
 		
 		Spacer()
     }
-}
-
-
-struct DocumentPicker: UIViewControllerRepresentable {
-	var onDocumentSelected: (URL) -> Void
-	
-	func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
-		let picker = UIDocumentPickerViewController(forOpeningContentTypes: [.commaSeparatedText], asCopy: true)
-		picker.delegate = context.coordinator
-		return picker
-	}
-	
-	func updateUIViewController(_ uiViewController: UIDocumentPickerViewController, context: Context) {
-	}
-	
-	func makeCoordinator() -> Coordinator {
-		Coordinator(self)
-	}
-	
-	class Coordinator: NSObject, UIDocumentPickerDelegate {
-		var parent: DocumentPicker
-		
-		init(_ documentPicker: DocumentPicker) {
-			self.parent = documentPicker
-		}
-		
-		func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-			guard let url = urls.first else { return }
-			parent.onDocumentSelected(url)
-		}
-	}
 }
 
 #Preview {
