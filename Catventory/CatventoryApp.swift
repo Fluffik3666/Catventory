@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 @main
 struct CatVentoryApp: App {
@@ -37,6 +38,10 @@ struct CatVentoryApp: App {
 		UserDefaults.standard.set(recievers, forKey: "recievers")
 		
 		UserDefaults.standard.set(false, forKey: "CheckInCheckOutSheetOpen")
+		
+		UserDefaults.standard.set([[String: String]](), forKey: "sessionCSVFile")
+		
+		TourDataStorage.initializeStructuredDataStorage()
 	}
 
 	var body: some Scene {

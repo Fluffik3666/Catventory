@@ -10,9 +10,11 @@ import Foundation
 
 struct CheckInCheckOutView: View {
 	var mode = UserDefaults.standard.object(forKey: "mode")
+	var parsedCSV: [Dictionary<String, String>]
 	@State var peformAction = false
 	private let recievers: [String: String] = UserDefaults.standard.object(forKey: "recievers") as? [String: String] ?? [:]
 	var QRtextresult: String
+	@State var selectedPerson = ""
 
 	func findKey(forValue value: String) -> String? {
 		for (key, val) in recievers {
@@ -26,14 +28,22 @@ struct CheckInCheckOutView: View {
 	
 	func goHome() {
 		if let window = UIApplication.shared.windows.first {
-			window.rootViewController = UIHostingController(rootView: ContentView())
+			window.rootViewController = UIHostingController(rootView: ContentView(parsedCSV: parsedCSV))
 			window.makeKeyAndVisible()
 		}
+	}
+	
+	func printCSV(csv givenCsv:[Dictionary<String, String>]) -> Bool {
+		print(givenCsv)
+		print("e")
+		print(UserDefaults.standard.object(forKey: "savedParsedCSVFiles") as Any)
+		return false
 	}
 	
 	
     var body: some View {
 		var key = findKey(forValue: QRtextresult)
+		var csvResultTest = printCSV(csv: parsedCSV)
 		 
 		if key == nil {
 			Button("Go Back", role: .cancel) {
@@ -70,11 +80,16 @@ struct CheckInCheckOutView: View {
 				.bold()
 			
 			
+			Picker("Choose a person", selection: $selectedPerson) {
+				ForEach(parsedCSV.indices, id: \.self) { index in
+					Text("\(parsedCSV[index]["First Name"] ?? "Unknown") \(parsedCSV[index]["Last Name"] ?? "Unknown")")
+				}
+			}
+			.pickerStyle(.wheel)
+			.background(RoundedRectangle(cornerRadius: 15).stroke(Color.orange))
+			.padding()
 			
 		}
     }
 }
 
-#Preview {
-    CheckInCheckOutView(QRtextresult: "42eb080b-2195-4ec9-82b0-ed8232925fd8")
-}

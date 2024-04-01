@@ -136,10 +136,11 @@ struct QRScanner: UIViewControllerRepresentable {
 		@State var peformAction = false
 		@State var showingScans = false
 		@State var showingSheet = false
+		var parsedCSV = UserDefaults.standard.object(forKey: "sessionCSVFile")
 		
 		func checkIncheckOutScreen() {
 			if let window = UIApplication.shared.windows.first {
-				window.rootViewController = UIHostingController(rootView: CheckInCheckOutView(QRtextresult: scanResult))
+				window.rootViewController = UIHostingController(rootView: CheckInCheckOutView(parsedCSV: parsedCSV as! [Dictionary<String, String>], QRtextresult: scanResult))
 				window.makeKeyAndVisible()
 			}
 		}
@@ -210,7 +211,4 @@ struct QRScanner: UIViewControllerRepresentable {
 	
 	
 	
-#Preview {
-		ContentView()
-}
 
