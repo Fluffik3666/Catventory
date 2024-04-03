@@ -75,7 +75,18 @@ struct HomeScreenView: View {
 			
 			csvImported = true
 			dismiss()
-			TourDataStorage.appendData(da: returnCSVRows)
+			if let firstRow = returnCSVRows.first {
+				if let tourName = firstRow["Tour name"] {
+					TourDataStorage.addTour(tourName: tourName, participants: returnCSVRows)
+				} else {
+					// Handle the case where "Tour Name" key doesn't exist in the dictionary
+					print("Tour Name key is missing")
+				}
+			} else {
+				// Handle the case where returnCSVRows is empty
+				print("CSV rows are empty")
+			}
+
 			return .success(returnCSVRows)
 		} catch {
 			csvImported = false
@@ -124,6 +135,7 @@ struct HomeScreenView: View {
 			
 			
 			Button() {
+				csvImported = true
 				importPreviousCSVFilesSheet = true
 			} label: {
 				Text("Import previous CSV files")
@@ -200,6 +212,20 @@ struct HomeScreenView: View {
 			.buttonStyle(.borderedProminent)
 			.frame(maxWidth: .infinity, alignment: .bottom)
 			.padding()
+			
+			//TODO: Remove this button as it is a developer button
+				
+			Button() {
+				print(UserDefaults.standard.object(forKey: "sessionCSVFile"))
+			} label: {
+				Text("DEBUG - print session csv file")
+				Image(systemName: "ladybug")
+			}
+			.foregroundStyle(.white)
+			.buttonStyle(.borderedProminent)
+			.frame(maxWidth: .infinity, alignment: .bottom)
+			.padding()
+		
 		}
 		
 		Spacer()

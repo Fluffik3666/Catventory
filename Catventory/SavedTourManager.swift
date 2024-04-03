@@ -14,32 +14,22 @@ struct TourDataStorage {
 			defaults.set([String: [[String: String]]](), forKey: "structuredTourDataStorage")
 		}
 	}
-
-	static func appendData(da: [[String: String]]) {
+	
+	static func addTour(tourName: String, participants: [[String: String]]) {
 		let defaults = UserDefaults.standard
-		var currentData = defaults.object(forKey: "structuredTourDataStorage") as? [String: [[String: String]]] ?? [String: [[String: String]]]()
-			
-		for dictionary in da {
-			if let tourName = dictionary["Tour name"] {
-				if currentData[tourName] == nil {
-					currentData[tourName] = [dictionary]
-				} else {
-					currentData[tourName]?.append(dictionary)
-				}
-			}
-		}
-			
-		defaults.set(currentData, forKey: "structuredTourDataStorage")
-	}
-
-	static func getStructuredData(forTourName tourName: String? = nil) -> [String: [[String: String]]] {
-		let defaults = UserDefaults.standard
-		let storedData = defaults.object(forKey: "structuredTourDataStorage") as? [String: [[String: String]]] ?? [String: [[String: String]]]()
-			
-		if let tourName = tourName {
-			return [tourName: storedData[tourName, default: [[String: String]]()]]
+		
+		// Attempt to retrieve the existing tours dictionary
+		var tours = defaults.dictionary(forKey: "structuredTourDataStorage") as? [String: [[String: String]]] ?? [:]
+		
+		// Check if the tour already exists
+		if tours[tourName] != nil {
+			print("\(tourName) already exists. Consider adding participants to the existing tour.")
 		} else {
-			return storedData
+			// Add the new tour with its participants
+			tours[tourName] = participants
+			
+			// Save the updated tours dictionary back to UserDefaults
+			defaults.set(tours, forKey: "structuredTourDataStorage")
 		}
 	}
 }

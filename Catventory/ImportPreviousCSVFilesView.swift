@@ -4,49 +4,48 @@
 //
 //  Created by Sasha Bagrov on 31/03/2024.
 //
-
 import SwiftUI
 
-struct Tour: Identifiable {
-	let id = UUID()
-	var name: String
-	var date: String
-	var time: String
-}
-
-
 struct ImportPreviousCSVFilesView: View {
-	var savedParsedCSVFiles = UserDefaults.standard.object(forKey: "savedParsedCSVFiles") as? [[String: String]]
+	var toursData: [String: [[String: String]]] {
+		(UserDefaults.standard.dictionary(forKey: "structuredTourDataStorage") as? [String: [[String: String]]]) ?? [:]
+	}
+	@Environment(\.dismiss) private var dismiss
 	
-	func fetchTours() -> [Tour] {
-		let structuredData = TourDataStorage.getStructuredData()
-		var tours: [Tour] = []
-
-		for (tourName, details) in structuredData {
-			details.forEach { detail in
-				if let date = detail["Tour date"], let time = detail["Tour time"] {
-					let tour = Tour(name: tourName, date: date, time: time)
-					tours.append(tour)
+	var body: some View {
+		List(toursData.keys.sorted(), id: \.self) { tourKey in
+			var data = toursData[tourKey]
+			
+			if let firstParticipant = toursData[tourKey]?.first,
+			   let tourName = firstParticipant["Tour name"],
+			   let tourDate = firstParticipant["Tour date"],
+			   let tourTime = firstParticipant["Tour time"] {
+				// Combine tour name, date, and time into a single text view
+				VStack(alignment: .leading) {
+					Text("\(tourName)")
+						.bold()
+						.font(.headline)
+					Text("Date: \(tourDate)")
+					Text("Time: \(tourTime)")
+					
+					Button {
+						UserDefaults.standard.set(data, forKey: "sessionCSVFile")
+						dismiss()
+					} label: {
+						HStack {
+							Text("Import this CSV")
+							Image(systemName: "square.and.arrow.down.on.square")
+						}
+					}
+					.buttonStyle(.borderedProminent)
 				}
 			}
 		}
-			
-		return tours
 	}
-
-    var body: some View {
-		var tours: [Tour] = fetchTours()
-		List(tours) { tour in
-			VStack(alignment: .leading) {
-				Text(tour.name)
-					.font(.headline)
-				Text("Date: \(tour.date), Time: \(tour.time)")
-					.font(.subheadline)
-			}
-		}
-    }
 }
+
 
 #Preview {
     ImportPreviousCSVFilesView()
 }
+

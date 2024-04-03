@@ -145,6 +145,13 @@ struct QRScanner: UIViewControllerRepresentable {
 			}
 		}
 		
+		func goHome() {
+			if let window = UIApplication.shared.windows.first {
+				window.rootViewController = UIHostingController(rootView: HomeScreenView())
+				window.makeKeyAndVisible()
+			}
+		}
+		
 		
 		
 		var body: some View {
@@ -183,25 +190,13 @@ struct QRScanner: UIViewControllerRepresentable {
 						
 						
 						HStack {
-								// TODO: Change this button to a back button to the main screen
 							Button(action: {
-								self.peformAction.toggle()
+								goHome()
 							}) {
 								Text("Back")
 							}
 							.foregroundStyle(.white)
 							.buttonStyle(.borderedProminent)
-							
-							Button(action: {
-								self.showingScans.toggle()
-							}) {
-								Text("Show Scans")
-							}
-							.foregroundStyle(.white)
-							.buttonStyle(.borderedProminent)
-							.sheet(isPresented: $showingScans) {
-								ShowAllScansView()
-							}
 						}
 					}
 				}
