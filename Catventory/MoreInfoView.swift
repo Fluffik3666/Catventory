@@ -29,7 +29,7 @@ struct MoreInfoView: View {
 		.frame(maxWidth: .infinity, alignment: .center)
 		.padding()
 		
-        Text("Version Beta 0.1")
+        Text("Version Beta 0.2")
 		Text("Developed and made by Sasha Bagrov")
 		Text("2024")
     }

@@ -10,7 +10,7 @@ import Foundation
 
 struct CheckInCheckOutView: View {
 	var mode = UserDefaults.standard.object(forKey: "mode")
-	var parsedCSV: [Dictionary<String, String>]
+	@State var parsedCSV: [Dictionary<String, String>]
 	@State var peformAction = false
 	private let recievers: [String: String] = UserDefaults.standard.object(forKey: "recievers") as? [String: String] ?? [:]
 	var QRtextresult: String
@@ -38,6 +38,31 @@ struct CheckInCheckOutView: View {
 		print("e")
 		print(UserDefaults.standard.object(forKey: "savedParsedCSVFiles") as Any)
 		return false
+	}
+	
+	private func updateSelectedPersonMode() {
+		if let index = parsedCSV.firstIndex(where: { "\($0["First Name"] ?? "") \($0["Last Name"] ?? "")" == selectedPerson }) {
+			// Get the current date and time
+			let now = Date()
+
+			// Create two instances of DateFormatter
+			let dateFormatter = DateFormatter()
+			let timeFormatter = DateFormatter()
+
+			// Set the date format
+			dateFormatter.dateFormat = "yyyy-MM-dd"
+			// Set the time format
+			timeFormatter.dateFormat = "HH:mm:ss"
+
+			// Convert date and time to strings
+			let dateString = dateFormatter.string(from: now)
+			let timeString = timeFormatter.string(from: now)
+			parsedCSV[index]["\(mode ?? "Check In")"] = "true"
+			parsedCSV[index]["Date on \(mode ?? "Check In")"] = dateString
+			parsedCSV[index]["Time on \(mode ?? "Check In")"] = timeString
+				// Just for debugging purpose:
+			print(parsedCSV)
+		}
 	}
 	
 	
@@ -83,13 +108,27 @@ struct CheckInCheckOutView: View {
 			Picker("Choose a person", selection: $selectedPerson) {
 				ForEach(parsedCSV.indices, id: \.self) { index in
 					Text("\(parsedCSV[index]["First Name"] ?? "Unknown") \(parsedCSV[index]["Last Name"] ?? "Unknown")")
+						.tag("\(parsedCSV[index]["First Name"] ?? "") \(parsedCSV[index]["Last Name"] ?? "")")
 				}
 			}
 			.pickerStyle(.wheel)
 			.background(RoundedRectangle(cornerRadius: 15).stroke(Color.orange))
 			.padding()
 			
+			
+			Button {
+				updateSelectedPersonMode()
+				goHome()
+			} label: {
+				Text("Confirm selection")
+				Image(systemName: "checkmark.seal")
+			}
+			.buttonStyle(.borderedProminent)
+			
 		}
     }
 }
 
+#Preview {
+	CheckInCheckOutView(parsedCSV: [["First Name": "Joey", "Last Name": "Bloggs"], ["First Name": "Timmy", "Last Name": "Blogovich"]], QRtextresult: "1c61218e-1bc5-44bb-b924-7426d9e47520")
+}
